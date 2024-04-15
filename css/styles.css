@@ -1,0 +1,76 @@
+body {
+    padding: 10px;
+    margin: 10px;
+    box-sizing: content-box;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    background-color: lightgrey; 
+    display: flex;
+
+}
+.card {
+    background-color: white;
+    border-radius: 50px;
+    display: flex;
+}
+
+.card-body {
+    padding: 50px;
+}
+
+.title {
+    color: black;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.alert {
+    background-color: #f2dede;
+    color: #a94442;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.text-center {
+    text-align: center;
+}
+.input_css {
+    display: flex;
+    width: 85%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 5px solid lightgray;
+    margin-bottom: 15px;
+}
+
+.submit_css {
+    display: flex;
+    width: 250px;
+    padding: 10px;
+    border: 5px solid;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: Green;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.submit_css:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+a {
+    color: #4CAF50; /* Green */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

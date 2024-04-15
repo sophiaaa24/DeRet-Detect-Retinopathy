@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe Game</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f8f8;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      grid-gap: 5px;
+      margin-top: 20px;
+    }
+
+    .cell {
+      width: 80px;
+      height: 80px;
+      font-size: 24px;
+      border: 2px solid #ccc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .cell:hover {
+      background-color: #f0f0f0;
+    }
+
+    #status {
+      margin-top: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tic-Tac-Toe Game</h1>
+  <div id="board"></div>
+  <p id="status"></p>
+<button id="play-again" onclick="playAgain()">Play Again</button>
+
+  <script>
+    const board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
+    let player = 1;
+    let win = 1;
+    let draw = -1;
+    let game = 0;
+    let mark = 'X';
+
+    function drawBoard() {
+      const boardContainer = document.getElementById('board');
+      boardContainer.innerHTML = '';
+
+      for (let i = 0; i < 9; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.index = i;
+        cell.addEventListener('click', () => makeMove(i));
+        cell.textContent = board[i];
+        boardContainer.appendChild(cell);
+      }
+    }
+
+    function checkPosition(x) {
+      return board[x] === ' ';
+    }
+
+    function checkWin() {
+      const winConditions = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+        [0, 4, 8], [2, 4, 6]             
+      ];
+
+      for (const condition of winConditions) {
+        const [a, b, c] = condition;
+        if (board[a] === board[b] && board[b] === board[c] && board[a] !== ' ') {
+          return win;
+        }
+      }
+
+      // Checking for draw
+      return board.every(cell => cell !== ' ') ? draw : 0;
+    }
+
+    function updateBoard(mark, pos) {
+      board[pos] = mark;
+    }
+
+    function makeMove(index) {
+      if (game !== 0 || !checkPosition(index)) {
+        return; // Invalid move
+      }
+
+      updateBoard(mark, index);
+      drawBoard();
+      game = checkWin();
+
+      if (game === win) {
+        player -= 1;
+        document.getElementById('status').textContent = (player % 2 !== 0) ? 'Player 2 wins!' : 'Player 1 wins!';
+      } else if (game === draw) {
+        document.getElementById('status').textContent = 'Game draw!';
+      } else {
+        player = 3 - player; 
+        mark = (player === 1) ? 'X' : 'O';
+        document.getElementById('status').textContent = `Player ${player}'s turn (${mark})`;
+      }
+    }
+	function playAgain() {
+      window.location.href = 'tic-tac-toe.html';
+    }
+    drawBoard();
+    document.getElementById('status').textContent = `Player ${player}'s turn (${mark})`;
+  </script>
+
+</body>
+</html>
